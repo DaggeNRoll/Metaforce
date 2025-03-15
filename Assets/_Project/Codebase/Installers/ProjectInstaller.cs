@@ -1,5 +1,4 @@
 ﻿using _Project.Codebase.Modules;
-using UnityEngine;
 using Zenject;
 
 namespace _Project.Codebase.Installers
