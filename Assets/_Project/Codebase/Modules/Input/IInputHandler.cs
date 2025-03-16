@@ -15,17 +15,12 @@ namespace _Project.Codebase.Modules
     }
 
     [UsedImplicitly]
-    public class DesktopInputHandler : IInputHandler, IDisposable, IInitializable, ITickable
+    public class DesktopInputHandler : IInputHandler, IInitializable, ITickable
     {
         public InputAction MoveAction { get; private set; }
         public InputAction ChangeWeaponAction { get; private set; }
         public Vector2 MoveValue { get; private set; }
         public event Action WeaponChanged;
-
-        public void Dispose()
-        {
-            
-        }
 
         public void Initialize()
         {
@@ -36,6 +31,8 @@ namespace _Project.Codebase.Modules
         public void Tick()
         {
             MoveValue = MoveAction.ReadValue<Vector2>().normalized;
+            if(ChangeWeaponAction.WasPressedThisFrame())
+                WeaponChanged?.Invoke();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Codebase.Modules.Player;
+﻿using _Project.Codebase.Modules.Player;
 using UnityEngine;
 using Zenject;
 

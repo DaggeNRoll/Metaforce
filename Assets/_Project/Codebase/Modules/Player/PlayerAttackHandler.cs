@@ -72,10 +72,10 @@ namespace _Project.Codebase.Modules.Player
         {
             _enemyObserver.ClosestObservableFound += OnClosesEnemyFound;
             _enemyObserver.NoObservableFound += OnNoEnemiesFound;
-            _inputHandler.ChangeWeaponAction.performed += OnWeaponChanged;
+            _inputHandler.WeaponChanged += OnWeaponChanged;
         }
 
-        private void OnWeaponChanged(InputAction.CallbackContext context)
+        private void OnWeaponChanged()
         {
             if(_currentGun.GetType() == typeof(Pistol))
                 SelectGun<Grenade>();
@@ -88,7 +88,6 @@ namespace _Project.Codebase.Modules.Player
         private void OnClosesEnemyFound(Transform obj)
         {
             _attackTarget = obj;
-            Debug.Log(_attackTarget.gameObject.name);
         }
 
         private void OnNoEnemiesFound()
@@ -100,7 +99,7 @@ namespace _Project.Codebase.Modules.Player
         {
             _enemyObserver.ClosestObservableFound -= OnClosesEnemyFound;
             _enemyObserver.NoObservableFound -= OnNoEnemiesFound;
-            _inputHandler.ChangeWeaponAction.performed -= OnWeaponChanged;
+            _inputHandler.WeaponChanged -= OnWeaponChanged;
         }
     }
 }
