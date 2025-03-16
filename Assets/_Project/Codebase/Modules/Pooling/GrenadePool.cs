@@ -2,14 +2,21 @@ using System.Collections.Generic;
 using _Project.Codebase.Modules.Player.Guns.Projectiles;
 using UnityEngine;
 using UnityEngine.Pool;
+using Zenject;
 
 namespace _Project.Codebase.Modules.Pooling
 {
     public class GrenadePool : MonoBehaviour
     {
-        [SerializeField] private Grenade grenadePrefab;
+        private Grenade.Factory _grenadeFactory;
         public IObjectPool<Grenade> Pool { get; private set; }
 
+        [Inject]
+        public void Construct(Grenade.Factory grenadeFactory)
+        {
+            _grenadeFactory = grenadeFactory;
+        }
+        
         private void Awake()
         {
             Pool =
@@ -46,7 +53,9 @@ namespace _Project.Codebase.Modules.Pooling
 
         private Grenade CreateGrenade()
         {
-            return Instantiate(grenadePrefab, transform);
+            var grenade = _grenadeFactory.Create();
+            grenade.transform.SetParent(transform);
+            return grenade;
         }
     }
 }

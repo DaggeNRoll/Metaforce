@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using _Project.Codebase.Modules.Player.Guns;
 using _Project.Codebase.Modules.Pooling;
-using _Project.Codebase.Modules.UI.Inventory;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace _Project.Codebase.Modules.Player
@@ -24,7 +24,7 @@ namespace _Project.Codebase.Modules.Player
         private Transform _attackTarget;
 
         [Inject]
-        public void Construct(InventoryController inventoryController, GunFactory gunFactory,
+        public void Construct(GunFactory gunFactory,
             EnemyObserver enemyObserver, BulletPool bulletPool, GrenadePool grenadePool, IInputHandler inputHandler)
         {
             _gunFactory = gunFactory;
@@ -72,10 +72,10 @@ namespace _Project.Codebase.Modules.Player
         {
             _enemyObserver.ClosestObservableFound += OnClosesEnemyFound;
             _enemyObserver.NoObservableFound += OnNoEnemiesFound;
-            _inputHandler.WeaponChanged += OnWeaponChanged;
+            _inputHandler.ChangeWeaponAction.performed += OnWeaponChanged;
         }
 
-        private void OnWeaponChanged()
+        private void OnWeaponChanged(InputAction.CallbackContext context)
         {
             if(_currentGun.GetType() == typeof(Pistol))
                 SelectGun<Grenade>();
@@ -100,6 +100,7 @@ namespace _Project.Codebase.Modules.Player
         {
             _enemyObserver.ClosestObservableFound -= OnClosesEnemyFound;
             _enemyObserver.NoObservableFound -= OnNoEnemiesFound;
+            _inputHandler.ChangeWeaponAction.performed -= OnWeaponChanged;
         }
     }
 }

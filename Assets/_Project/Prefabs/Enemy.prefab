@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 3670590348069850458}
   - component: {fileID: 5055473811006163158}
   - component: {fileID: 1867827251708233087}
+  - component: {fileID: 4937398473822580617}
+  - component: {fileID: 1069578237540382089}
+  - component: {fileID: 2100380337950200452}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -123,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97340bf8ff8048e8a25b43e30007cc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 2100380337950200452}
+  radius: 10
 --- !u!114 &5055473811006163158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 4937398473822580617}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -158,3 +164,50 @@ MonoBehaviour:
   _useSceneContext: 1
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &4937398473822580617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654915647880615907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353b05225e2b40a3b2a00124764d7854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 1069578237540382089}
+--- !u!114 &1069578237540382089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654915647880615907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ee612c2f0042b1b6d6806723a2395c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &2100380337950200452
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654915647880615907}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

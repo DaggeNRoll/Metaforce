@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using _Project.Codebase.Modules.Player.Guns.Projectiles;
 using UnityEngine;
 using UnityEngine.Pool;
+using Zenject;
 
 namespace _Project.Codebase.Modules.Pooling
 {
     public class BulletPool : MonoBehaviour
     {
-        [SerializeField] private Bullet bulletPrefab;
+        private Bullet.Factory _bulletFactory;
         public IObjectPool<Bullet> Pool { get; private set; }
+
+        [Inject]
+        public void Construct(Bullet.Factory bulletFactory)
+        {
+            _bulletFactory = bulletFactory;
+        }
 
         private void Awake()
         {
@@ -47,7 +54,9 @@ namespace _Project.Codebase.Modules.Pooling
 
         private Bullet CreateBullet()
         {
-            return Instantiate(bulletPrefab, transform);
+            var bullet = _bulletFactory.Create();
+            bullet.transform.SetParent(transform);
+            return bullet;
         }
     }
 }

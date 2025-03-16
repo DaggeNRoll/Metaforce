@@ -36,7 +36,6 @@ namespace _Project.Codebase.Modules
         public void Tick()
         {
             MoveValue = MoveAction.ReadValue<Vector2>().normalized;
-            ChangeWeaponAction.performed += delegate { WeaponChanged?.Invoke(); };
         }
     }
 }

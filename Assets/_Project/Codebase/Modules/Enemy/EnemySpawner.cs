@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ namespace _Project.Codebase.Modules.Enemy
         private List<Transform> spawningPositions;
         
         private Enemy.Factory _enemyFactory;
+        private WaitForSeconds _delay = new WaitForSeconds(5f);
 
         [Inject]
         public void Construct(Enemy.Factory factory)
@@ -25,16 +27,25 @@ namespace _Project.Codebase.Modules.Enemy
                 SpawnEnemyWithPosition(position.position);
         }
 
-        public void SpawnEnemy()
+        public void RespawnEnemyWithDelay(Enemy enemy)
         {
-            var enemy = _enemyFactory.Create();
-            enemy.transform.position = spawningPositions[Random.Range(0, spawningPositions.Count)].position;
+            StartCoroutine(RespawnWithDelay(enemy));
         }
 
         private void SpawnEnemyWithPosition(Vector3 position)
         {
             var enemy = _enemyFactory.Create();
             enemy.transform.position = position;
+            enemy.Reset();
+        }
+
+        private IEnumerator RespawnWithDelay(Enemy enemy)
+        {
+            yield return _delay;
+            
+            var position = spawningPositions[Random.Range(0, spawningPositions.Count)];
+            enemy.transform.position = position.position;
+            enemy.Reset();
         }
     }
 }
