@@ -7,5 +7,7 @@ namespace _Project.Codebase.Modules.Conifguration
     {
         [field: SerializeField]
         public float MovementSpeed { get; private set; }
+        [field: SerializeField]
+        public float EnemyObserveRange { get; private set; }
     }
 }

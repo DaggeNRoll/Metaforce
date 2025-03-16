@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerConfiguration
   m_EditorClassIdentifier: 
   <MovementSpeed>k__BackingField: 5
+  <EnemyObserveRange>k__BackingField: 5

@@ -31,7 +31,7 @@ namespace _Project.Codebase.Modules.Player
                 .SimpleMove(new Vector3(_inputHandler.MoveValue.x, 0f, _inputHandler.MoveValue.y) * _speed);
         }
 
-        public void Initialize()
+        private void Initialize()
         {
             _speed = _configurationService.GetConfiguration<PlayerConfiguration>().MovementSpeed;
         }
